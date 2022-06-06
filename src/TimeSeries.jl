@@ -1,10 +1,11 @@
-module TimeSeries
+module TimeSeriesArrays
 
-abstract type AbstractTimeSeries end
+abstract type AbstractTimeSeries{T,N,D} end
 
-struct TimeSeriesArray <: AbstractTimeSeries
-    index::Vector{Int32}
-    values::Vector{Float64}
+struct TimeSeries{T,N,D<:TimeType,A<:AbstractArray{T,N}} <: AbstractTimeSeries{T,N,D}
+    index::Vector{D}
+    values::A
+    colnames::Vector(Symbol)
 end
 
-end
+end # module

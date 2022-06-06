@@ -1,9 +1,15 @@
 module Forecast
 
-export TimeSeries, NaiveForecaster, mean_squared_error, mean_absolute_error
+include("TimeSeries.jl") # imports TimeSeries module
+using .TimeSeriesArrays
+export TimeSeries
 
-include("TimeSeries.jl")
-include("Estimators.jl")
-include("Metrics.jl")
+include("Estimators.jl") # imports Estimators module
+using .Estimators
+export NaiveForecaster
 
-end
+include("Metrics.jl") # imports Metrics module
+using .Metrics
+export mean_absolute_error, mean_squared_error
+
+end # module

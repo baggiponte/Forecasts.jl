@@ -8,4 +8,4 @@ struct NaiveForecaster <: AbstractForecaster
     strategy::String
 end
 
-end
+end # module

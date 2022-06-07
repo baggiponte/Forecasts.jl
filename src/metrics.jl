@@ -19,7 +19,7 @@ Can be any subtype of Real - in other words, any integer or float.
 Can be any subtype of Real - in other words, any integer or float.
 
 # Examples
-```julia-repl
+```jldoctest
 julia> mean_absolute_error([1, 1, 1], [0, 0, 0])
 1.0
 
@@ -51,7 +51,7 @@ Can be any subtype of Real - in other words, any integer or float.
 - `square::Bool`: whether to return the MSE or RMSE. Defaults to `false`.
 
 # Examples
-```julia-repl
+```jldoctest
 julia> mean_squared_error([2, 2, 2], [0, 0, 0])
 4.0
 

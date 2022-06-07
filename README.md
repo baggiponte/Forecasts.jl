@@ -20,3 +20,8 @@ This PoC draws inspiration for several Julia packages and frameworks:
 - [Pythia](https://github.com/ababii/Pythia.jl) by ababii.
 - [TimeSeries](https://github.com/JuliaStats/TimeSeries.jl) from the JuliaStats framework.
 
+For the API interface philosophy, please refer to the followings:
+
+- [scikit-learn](https://github.com/scikit-learn/scikit-learn)
+- [sktime](https://github.com/alan-turing-institute/sktime/)
+- [darts](https://github.com/unit8co/darts)

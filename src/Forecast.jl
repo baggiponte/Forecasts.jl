@@ -9,7 +9,7 @@ using .Learners
 export NaiveForecaster
 
 include("metrics.jl") # imports Metrics module
-using .Metrics
+using .RegressionMetrics
 export mean_absolute_error, mean_squared_error
 
 end

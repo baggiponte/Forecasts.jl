@@ -12,4 +12,4 @@ include("Metrics.jl") # imports Metrics module
 using .Metrics
 export mean_absolute_error, mean_squared_error
 
-end # module
+end

@@ -8,4 +8,4 @@ struct TimeSeries{T,N,D<:TimeType,A<:AbstractArray{T,N}} <: AbstractTimeSeries{T
     colnames::Vector(Symbol)
 end
 
-end # module
+end

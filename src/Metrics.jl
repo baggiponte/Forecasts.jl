@@ -17,4 +17,5 @@ function mean_absolute_error(predictions::T, ground_truth::T) where {T<:Abstract
     return (sum(abs.(ground_truth .- predictions)) / length(predictions))
 end
 
-end # module
+end
+

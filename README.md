@@ -1,4 +1,4 @@
-# Forecast: a PoC for Time Series Forecasting in Julia
+# Forecasts: a PoC for Time Series Forecasting in Julia
 
 [![Coverage](https://codecov.io/gh/baggiponte/Forecast.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/baggiponte/Forecast.jl)
 
@@ -8,7 +8,7 @@ Forecast is not yet registered, so you can install it with:
 
 ```
 julia> using Pkg
-julia> Pkg.add(url="https://github.com/baggiponte/Forecast.jl")
+julia> Pkg.add(url="https://github.com/baggiponte/Forecasts.jl")
 ```
 
 ## Credits and References

@@ -1,6 +1,6 @@
-using Forecast
+using Forecasts
 using Test
 
-@testset "Forecast.jl" begin
+@testset "Forecasts.jl" begin
     # Write your tests here.
 end

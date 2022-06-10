@@ -1,6 +1,6 @@
 # Forecasts: a PoC for Time Series Forecasting in Julia
 
-[![Coverage](https://codecov.io/gh/baggiponte/Forecast.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/baggiponte/Forecast.jl)
+[![Coverage](https://codecov.io/gh/baggiponte/Forecasts.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/baggiponte/Forecasts.jl)
 
 ## Installation
 

@@ -1,6 +1,8 @@
 # Forecasts: a PoC for Time Series Forecasting in Julia
 
 [![Coverage](https://codecov.io/gh/baggiponte/Forecasts.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/baggiponte/Forecasts.jl)
+[![tests](https://github.com/baggiponte/Forecasts.jl/workflows/tests/badge.svg)](https://github.com/baggiponte/Forecasts.jl/actions/workflows/tests.yml)
+
 
 ## Installation
 

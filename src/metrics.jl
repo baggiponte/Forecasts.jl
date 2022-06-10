@@ -1,5 +1,7 @@
 module RegressionMetrics
 
+export mean_absolute_error, mean_squared_error
+
 using Statistics: mean
 
 """

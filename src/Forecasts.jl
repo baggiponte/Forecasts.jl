@@ -9,6 +9,7 @@ module Forecasts
 # export NaiveDrift, NaiveSeasonal
 
 include("metrics.jl")
-export RegressionMetrics.mean_absolute_error, RegressionMetrics.mean_squared_error
+using .RegressionMetrics
+export mean_absolute_error, mean_squared_error
 
 end

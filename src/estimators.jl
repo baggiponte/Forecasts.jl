@@ -78,33 +78,5 @@ function fit(forecaster::NaiveSeasonal, forecasting_horizon::F, y::T) where {F<:
 
 end
 
-"""
-    NaiveDrift()
-
-Fits a line between the first and last point of the training series, and extends it in the future.
-
-# Arguments
-
-- `window_length<:Int`: the number of elements used to compute the trend.
-If `-1`, the trend will be computed on the whole series.
-"""
-@kwdef struct NaiveDrift{T<:Integer} <: AbstractNaiveForecaster
-    window_length::T = 1
-    NaiveDrift(window_length) = new(window_length)
-end
-
-NaiveDrift() = NaiveDrift{<:Integer}(-1)
-
-function fit(forecaster::NaiveDrift, forecasting_horizon::F, y::T) where {F<:Integer} where {T<:AbstractVector{<:Real}}
-    @assert forecaster.window_length <= length(y) "`window_length` is greater than `y`!"
-
-    if forecaster.window_length == -1
-        slope::Float64 = (y[end] - y[1]) / length(y)
-    else
-        slope = (y[end] - y[end-forecaster.window_length]) / forecaster.window_length
-    end
-
-    return [y[end] + slope * step for step in Vector(1:forecasting_horizon)]
-end
 
 end

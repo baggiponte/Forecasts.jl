@@ -1,6 +1,7 @@
 module Estimators
 
 using ..ForecastsExceptions: WindowLengthMismatch
+
 abstract type AbstractEstimator end
 abstract type AbstractForecaster <: AbstractEstimator end
 abstract type AbstractNaiveForecaster <: AbstractForecaster end

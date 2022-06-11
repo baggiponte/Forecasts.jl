@@ -5,7 +5,17 @@ abstract type AbstractEstimator end
 abstract type AbstractForecaster <: AbstractEstimator end
 abstract type AbstractNaiveForecaster <: AbstractForecaster end
 
+function fit(forecaster::NaiveDrift, forecasting_horizon::F, y::T) where {F<:Integer} where {T<:AbstractVector{<:Real}}
     forecaster.window_length <= length(y) || throw(WindowLengthError("`$forecaster`'s window length is greater than `y`"))
+
+    if forecaster.window_length == 0 || forecaster.window_length == len(y)
+        slope::Float64 = (y[end] - y[1]) / length(y)
+    else
+        slope = (y[end] - y[end-forecaster.window_length]) / forecaster.window_length
+    end
+
+    return [y[end] + slope * step for step in Vector(1:forecasting_horizon)]
+end
 """
     NaiveSeasonal(S<:Int)
 

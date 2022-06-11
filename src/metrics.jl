@@ -30,9 +30,7 @@ julia> mean_absolute_error([1.2, 0.8, 0.95], [1.1, 0.9, 1])
 ```
 """
 function mean_absolute_error(predictions::Vector{<:Real}, ground_truth::Vector{<:Real})
-    if length(predictions) != length(ground_truth)
-        throw(DimensionMismatch("`predictions` and `ground_truth` should have the same length!"))
-    end
+    length(predictions) == length(ground_truth) || throw(DimensionMismatch("`predictions` and `ground_truth` should have the same length!"))
     return mean(abs.(ground_truth .- predictions))
 end
 
@@ -69,9 +67,7 @@ julia> mean_absolute_error([1.2, 0.8, 0.95], [1.1, 0.9, 1], square=true)
 0.08660254037844382
 """
 function mean_squared_error(predictions::Vector{<:Real}, ground_truth::Vector{<:Real}; square::Bool=false)
-    if length(predictions) != length(ground_truth)
-        throw(DimensionMismatch("`predictions` and `ground_truth` should have the same length!"))
-    end
+    length(predictions) == length(ground_truth) || throw(DimensionMismatch("`predictions` and `ground_truth` should have the same length!"))
 
     mse = mean((ground_truth .- predictions) .^ 2)
 

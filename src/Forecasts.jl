@@ -6,9 +6,9 @@ include("exceptions.jl")
 # using .TimeSeriesArrays
 # export TimeSeries
 
-# include("estimators.jl")
-# using .Estimators
-# export NaiveDrift, NaiveSeasonal
+include("estimators.jl")
+using .Estimators
+export NaiveDrift, NaiveSeasonal
 
 include("metrics.jl")
 using .RegressionMetrics

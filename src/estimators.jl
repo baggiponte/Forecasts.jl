@@ -17,21 +17,21 @@ Fits a line between two points of the (training) series `y`, and extends it in t
     NaiveDrift(0)
     NaiveDrift(7)
 
-The first two methods are equivalent and will use the whole series `y`.
+The first two methods are equivalent and will use the whole series `y` when the `fit` function is called.
 The last constructor specifies a window length of 7. 
 
 # Arguments
 
-- `window_length<:Unsigned`: the number of elements used to compute the trend.
+- `window_length<:Integer`: the number of elements used to compute the trend.
 It must be a positive integer. If no argument is passed, or set to `0`, the whole length of the 
 series will be used.
 """
-struct NaiveDrift{T<:Unsigned} <: AbstractNaiveForecaster
+struct NaiveDrift{T<:Integer} <: AbstractNaiveForecaster
     window_length::T
-    NaiveDrift(window_length) = new(window_length)
+    NaiveDrift{T}(window_length) where {T<:Integer} = window_length >= 0 ? throw(WindowLengthDomainError("`window_length` must be non-negative!")) : new(window_length)
 end
 
-NaiveDrift(0) = NaiveDrift(length(y))
+NaiveDrift(window_length::T) where {T<:Integer} = NaiveDrift{T}(window_length)
 NaiveDrift() = NaiveDrift(0)
 
 function fit(forecaster::NaiveDrift, forecasting_horizon::F, y::T) where {F<:Integer} where {T<:AbstractVector{<:Real}}

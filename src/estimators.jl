@@ -1,6 +1,6 @@
 module Estimators
 
-using ..ForecastsExceptions: WindowLengthMismatch
+using ..ForecastsExceptions: PeriodDomainError, WindowLengthDomainError, WindowLengthMismatch
 
 abstract type AbstractEstimator end
 abstract type AbstractForecaster <: AbstractEstimator end
@@ -35,7 +35,7 @@ NaiveDrift(0) = NaiveDrift(length(y))
 NaiveDrift() = NaiveDrift(0)
 
 function fit(forecaster::NaiveDrift, forecasting_horizon::F, y::T) where {F<:Integer} where {T<:AbstractVector{<:Real}}
-    forecaster.window_length <= length(y) || throw(WindowLengthError("`$forecaster`'s window length is greater than `y`"))
+    forecaster.window_length <= length(y) || throw(WindowLengthMismatch("`$forecaster`'s window length is greater than `y`"))
 
     if forecaster.window_length == 0 || forecaster.window_length == len(y)
         slope::Float64 = (y[end] - y[1]) / length(y)
@@ -63,7 +63,7 @@ When S>1, it repeats the last K values of the training set.
 """
 struct NaiveSeasonal{T<:Integer} <: AbstractNaiveForecaster
     period::T
-    NaiveSeasonal(period) = new(period)
+    NaiveSeasonal{T}(period) where {T<:Integer} = period >= 0 ? throw(PeriodDomainError("`period` must be non-negative!")) : new(period)
 end
 
 NaiveSeasonal() = NaiveSeasonal{<:Integer}(1)

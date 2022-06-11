@@ -47,15 +47,15 @@ function fit(forecaster::NaiveDrift, forecasting_horizon::F, y::T) where {F<:Int
 end
 
 """
-    NaiveSeasonal(S<:Int)
+    NaiveSeasonal(T<:Int)
 
 The prediction is always the value of S time steps ago.
-When S=1, this model predicts the last value of the training set.
-When S>1, it repeats the last K values of the training set.
+When T=1, this model predicts the last value of the training set.
+When T>1, it repeats the last K values of the training set.
 
 # Constructors
 
-    NaiveSeasonal(S<:Int)
+    NaiveSeasonal(T<:Int)
     NaiveSeasonal()
 
 # Arguments

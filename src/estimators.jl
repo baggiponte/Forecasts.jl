@@ -5,6 +5,34 @@ abstract type AbstractEstimator end
 abstract type AbstractForecaster <: AbstractEstimator end
 abstract type AbstractNaiveForecaster <: AbstractForecaster end
 
+"""
+    NaiveDrift()
+
+Fits a line between two points of the (training) series `y`, and extends it in the future.
+
+# Constructors
+
+    NaiveDrift()
+    NaiveDrift(0)
+    NaiveDrift(7)
+
+The first two methods are equivalent and will use the whole series `y`.
+The last constructor specifies a window length of 7. 
+
+# Arguments
+
+- `window_length<:Unsigned`: the number of elements used to compute the trend.
+It must be a positive integer. If no argument is passed, or set to `0`, the whole length of the 
+series will be used.
+"""
+struct NaiveDrift{T<:Unsigned} <: AbstractNaiveForecaster
+    window_length::T
+    NaiveDrift(window_length) = new(window_length)
+end
+
+NaiveDrift(0) = NaiveDrift(length(y))
+NaiveDrift() = NaiveDrift(0)
+
 function fit(forecaster::NaiveDrift, forecasting_horizon::F, y::T) where {F<:Integer} where {T<:AbstractVector{<:Real}}
     forecaster.window_length <= length(y) || throw(WindowLengthError("`$forecaster`'s window length is greater than `y`"))
 
@@ -16,6 +44,7 @@ function fit(forecaster::NaiveDrift, forecasting_horizon::F, y::T) where {F<:Int
 
     return [y[end] + slope * step for step in Vector(1:forecasting_horizon)]
 end
+
 """
     NaiveSeasonal(S<:Int)
 

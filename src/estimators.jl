@@ -1,9 +1,11 @@
 module Estimators
 
+using ..ForecastsExceptions: WindowLengthMismatch
 abstract type AbstractEstimator end
 abstract type AbstractForecaster <: AbstractEstimator end
 abstract type AbstractNaiveForecaster <: AbstractForecaster end
 
+    forecaster.window_length <= length(y) || throw(WindowLengthError("`$forecaster`'s window length is greater than `y`"))
 """
     NaiveSeasonal(S<:Int)
 

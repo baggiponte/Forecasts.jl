@@ -7,5 +7,4 @@ Error thrown when the window length of an estimator is greater than the length o
 """
 struct WindowLengthMismatch <: Exception end
 
-
 end

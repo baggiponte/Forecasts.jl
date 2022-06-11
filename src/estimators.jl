@@ -1,6 +1,9 @@
 module Estimators
 
-using ..ForecastsExceptions: PeriodDomainError, WindowLengthDomainError, WindowLengthMismatch
+export NaiveDrift, NaiveSeasonal
+
+using ..ForecastsExceptions: WindowLengthDomainError, WindowLengthMismatch
+using ..ForecastsExceptions: PeriodDomainError, PeriodLengthError
 
 abstract type AbstractEstimator end
 abstract type AbstractForecaster <: AbstractEstimator end
@@ -28,7 +31,7 @@ series will be used.
 """
 struct NaiveDrift{T<:Integer} <: AbstractNaiveForecaster
     window_length::T
-    NaiveDrift{T}(window_length) where {T<:Integer} = window_length >= 0 ? throw(WindowLengthDomainError("`window_length` must be non-negative!")) : new(window_length)
+    NaiveDrift{T}(window_length) where {T<:Integer} = window_length < 0 ? throw(WindowLengthDomainError("`window_length` must be non-negative!")) : new(window_length)
 end
 
 NaiveDrift(window_length::T) where {T<:Integer} = NaiveDrift{T}(window_length)
@@ -63,13 +66,14 @@ When T>1, it repeats the last K values of the training set.
 """
 struct NaiveSeasonal{T<:Integer} <: AbstractNaiveForecaster
     period::T
-    NaiveSeasonal{T}(period) where {T<:Integer} = period >= 0 ? throw(PeriodDomainError("`period` must be non-negative!")) : new(period)
+    NaiveSeasonal{T}(period) where {T<:Integer} = period < 0 ? throw(PeriodDomainError("`period` must be non-negative!")) : new(period)
 end
 
-NaiveSeasonal() = NaiveSeasonal{<:Integer}(1)
+NaiveSeasonal(period::T) where {T<:Integer} = NaiveSeasonal{T}(period)
+NaiveSeasonal() = NaiveSeasonal(0)
 
 function fit(forecaster::NaiveSeasonal, forecasting_horizon::F, y::T) where {F<:Integer} where {T<:AbstractVector{<:Real}}
-    @assert forecaster.period <= length(y) "Seasonal periodicity `period` is greater than `y`!"
+    forecaster.period <= length(y) || throw(PeriodLengthError("`$forecaster`'s period length is greater than `y`"))
     if forecaster.period == 1
         return fill(y[end], forecasting_horizon)
     else

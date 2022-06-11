@@ -78,5 +78,4 @@ function fit(forecaster::NaiveSeasonal, forecasting_horizon::F, y::T) where {F<:
 
 end
 
-
 end

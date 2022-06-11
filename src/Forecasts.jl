@@ -1,5 +1,7 @@
 module Forecasts
 
+include("exceptions.jl")
+
 # include("timeseries.jl")
 # using .TimeSeriesArrays
 # export TimeSeries
